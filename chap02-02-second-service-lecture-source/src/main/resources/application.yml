@@ -7,7 +7,7 @@ spring:
 
 eureka:
   
-  # ??? instance-id ??
+  # 랜덤한 instance-id 부여
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
