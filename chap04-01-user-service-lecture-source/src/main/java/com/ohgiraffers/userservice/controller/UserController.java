@@ -1,6 +1,7 @@
 package com.ohgiraffers.userservice.controller;
 
 import com.ohgiraffers.userservice.dto.UserDTO;
+import com.ohgiraffers.userservice.service.UserService;
 import com.ohgiraffers.userservice.vo.HelloVO;
 import com.ohgiraffers.userservice.vo.RequestUser;
 import com.ohgiraffers.userservice.vo.ResponseUser;
@@ -18,12 +19,14 @@ public class UserController {
     private Environment env;
     private HelloVO helloVO;
     private ModelMapper modelMapper;
+    private UserService userService;
 
     @Autowired
-    public UserController(Environment env, HelloVO helloVO, ModelMapper modelMapper) {
+    public UserController(Environment env, HelloVO helloVO, ModelMapper modelMapper, UserService userService) {
         this.env = env;
         this.helloVO = helloVO;
         this.modelMapper = modelMapper;
+        this.userService = userService;
     }
 
     /* 설명.
@@ -48,10 +51,16 @@ public class UserController {
     /* 설명. 회원가입(POST - /users) */
     @PostMapping("/users")
     public ResponseEntity<ResponseUser> registUser(@RequestBody RequestUser user) {
+
+        /* 설명. RequestUser -> UserDTO */
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
         System.out.println("userDTO = " + userDTO);
 
-        ResponseUser responseUser = new ResponseUser();
+        /* 설명. 회원가입 비즈니스 로직 시작 */
+        userService.registUser(userDTO);
+
+        /* 설명. UserDTO -> ResponseUser */
+        ResponseUser responseUser = modelMapper.map(userDTO, ResponseUser.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
     }
