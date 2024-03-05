@@ -46,9 +46,41 @@ spring:
   cloud:
     gateway:
       routes:
+#        - id: user-service
+#          uri: lb://SWCAMP-USER-SERVICE
+#          predicates:
+#            - Path=/user-service/**
+#          filters:
+#            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
+        # 회원 가입 이후 로드 밸런싱
         - id: user-service
           uri: lb://SWCAMP-USER-SERVICE
           predicates:
             - Path=/user-service/**
+            - Method=GET
           filters:
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
+            # 현재 상황의 라우팅에서 토큰을 들고와서 요청하는지 판단
+            - AuthorizationHeaderFilter
+
+        - id: user-service
+          uri: lb://SWCAMP-USER-SERVICE
+          predicates:
+            - Path=/user-service/users
+            - Method=POST
+          filters:
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
+        - id: user-service
+          uri: lb://SWCAMP-USER-SERVICE
+          predicates:
+            - Path=/user-service/login
+            - Method=POST
+          filters:
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+
+
+token:
+  secret: l1Z5I9WufSD5qM0UTHXDJa1kaGxBlyhKMbx+ONkqzeRTlKdF8Bq37mA3Z8nhjRlwVUrL/u3bdkFeamIrUoWvVw==
