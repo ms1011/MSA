@@ -81,6 +81,14 @@ spring:
           filters:
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
 
+        # 주문 관련 도메인(마이크로 서비스)
+        - id: order-service
+          uri: lb://SWCAMP-ORDER-SERVICE
+          predicates:
+            - Path=/order-service/**
+          filters:
+            - RewritePath=/order-service/(?<segment>.*), /$\{segment}
+
 
 token:
   secret: l1Z5I9WufSD5qM0UTHXDJa1kaGxBlyhKMbx+ONkqzeRTlKdF8Bq37mA3Z8nhjRlwVUrL/u3bdkFeamIrUoWvVw==

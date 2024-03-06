@@ -11,5 +11,5 @@ public class ResponseUser {
     private String userId;          // 사용자 id(회원번호 아님)
 
     /* 설명. FeignClient 이후(다른 도메인 서버와 통신해서 값을 가져온 이후) 추가할 것 */
-//    private List<ResponseUser> orders;
+    private List<ResponseOrder> orders;
 }
