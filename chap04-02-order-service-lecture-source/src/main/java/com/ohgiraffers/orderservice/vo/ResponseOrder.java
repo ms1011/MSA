@@ -1,17 +1,14 @@
-package com.ohgiraffers.orderservice.dto;
+package com.ohgiraffers.orderservice.vo;
 
+import com.ohgiraffers.orderservice.dto.OrderMenuDTO;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class OrderDTO {
-
-    private int orderCode;
-    private int userId;
+public class ResponseOrder {
     private String orderDate;
     private String orderTime;
-    private int totalOrderPrice;
 
     private List<OrderMenuDTO> orderMenus;
 }
