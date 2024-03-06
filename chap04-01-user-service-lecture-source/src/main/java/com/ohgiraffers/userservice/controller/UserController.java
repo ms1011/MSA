@@ -64,4 +64,13 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
     }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<ResponseUser> getUser(@PathVariable("id") String id) {
+        UserDTO userDTO = userService.getUserById(id);
+
+        ResponseUser returnValue = modelMapper.map(userDTO, ResponseUser.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+    }
 }

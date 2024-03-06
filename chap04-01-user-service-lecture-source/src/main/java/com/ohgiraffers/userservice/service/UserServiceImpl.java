@@ -65,6 +65,19 @@ public class UserServiceImpl implements UserService {
         return userDTO;
     }
 
+    @Override
+    public UserDTO getUserById(String id) {
+
+        UserEntity userEntity = userRepository.findById(Long.valueOf(id))
+                .orElseThrow(() -> {
+                    return new UsernameNotFoundException("조회된 회원 없음");
+                });
+
+        UserDTO userDTO = modelMapper.map(userEntity, UserDTO.class);
+
+        return userDTO;
+    }
+
     /* 설명. UserDetailsService 인터페이스 상속 이후 DB에서 로그인 사용자 정보 조회 후 UserDetails 타입으로 반환하는 기능 구현 */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
