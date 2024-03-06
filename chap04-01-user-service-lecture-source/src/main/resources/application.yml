@@ -33,10 +33,17 @@ eureka:
 swcamp:
   message: Let's do msa!
 
-token:
+#token:
+#
+#  # JWT 토큰의 만료시간 설정(ms)
+#  expiration_time: 43200000
+#
+#  # JWT 토큰의 Verify Signature를 위한 secret-key
+#  secret: l1Z5I9WufSD5qM0UTHXDJa1kaGxBlyhKMbx+ONkqzeRTlKdF8Bq37mA3Z8nhjRlwVUrL/u3bdkFeamIrUoWvVw==
 
-  # JWT 토큰의 만료시간 설정(ms)
-  expiration_time: 43200000
-
-  # JWT 토큰의 Verify Signature를 위한 secret-key
-  secret: l1Z5I9WufSD5qM0UTHXDJa1kaGxBlyhKMbx+ONkqzeRTlKdF8Bq37mA3Z8nhjRlwVUrL/u3bdkFeamIrUoWvVw==
+# actuator 추가 후
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans

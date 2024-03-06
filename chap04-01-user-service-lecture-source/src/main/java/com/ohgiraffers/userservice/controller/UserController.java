@@ -52,6 +52,9 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<ResponseUser> registUser(@RequestBody RequestUser user) {
 
+        /* 설명. config server에서 제공하는 test.message값 확인 */
+        System.out.println("config server의 설정값 확인 : " + env.getProperty("test.message"));
+
         /* 설명. RequestUser -> UserDTO */
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
         System.out.println("userDTO = " + userDTO);

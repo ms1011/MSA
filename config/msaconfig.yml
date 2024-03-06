@@ -1,0 +1,6 @@
+token:
+  expiration_time: 43200000
+  secret: l1Z5I9WufSD5qM0UTHXDJa1kaGxBlyhKMbx+ONkqzeRTlKdF8Bq37mA3Z8nhjRlwVUrL/u3bdkFeamIrUoWvVw==
+
+test:
+  message: success1231231231
